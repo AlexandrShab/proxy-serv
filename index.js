@@ -32,6 +32,7 @@ async function fetchUrl(url, data = false) {
             },
             body: JSON.stringify(data),
         }
+        console.log('URL >>>'.url)
         let response = await fetch(url, options)
         let res = await response.json()
         console.log(res)
