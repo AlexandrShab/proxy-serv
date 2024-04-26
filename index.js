@@ -13,7 +13,10 @@ app.get('/', async (req, res) => {
 
 app.post('/', async (req, res) => {
     console.log(req.query)
-    let result = await fetchUrl(req.query.url, req.body)
+    let result = { ok: false, result: "no URL specified" }
+    if (req.query && req.query.hasOwnProperty('url')) {
+        result = await fetchUrl(req.query.url, req.body)
+    }
     res.send(result)
 })
 
