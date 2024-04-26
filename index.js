@@ -23,6 +23,7 @@ app.listen(PORT, () => {
 })
 
 async function fetchUrl(url, data = false) {
+    url = + '?api_key=e9fda4c1d8b07802b36231a25e0090ef&append_to_response=videos'
     if (data) {
         const options = {
             method: "POST",
