@@ -1,9 +1,20 @@
 const express = require('express')
 const fetch = require('node-fetch-native')
-
+const proxy = require('express-http-proxy')
+const Stream = require('stream');
 const PORT = process.env.PORT || 10000
 
 const app = express()
+
+app.use('/image', proxy('https://image.tmdb.org/t/p/original/', {//eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg'
+    proxyReqPathResolver: function (req) {
+        var parts = req.url.split('/');
+        var fileName = parts.pop();
+        return fileName ? fileName : '';
+    }
+}))
+
+//pp.use('/image', proxy('https://images.unsplash.com/photo-1566275529824-cca6d008f3da?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGhvdG98ZW58MHx8MHx8fDA%3D'))
 
 app.get('/', async (req, res) => {
     console.log(req.query)
@@ -31,6 +42,33 @@ app.get('/api', async (req, res) => {
 
 })
 
+
+
+
+
+
+
+
+/*
+app.get('/image', async (req, res) => {
+    /* console.log(req.query)
+     let result = { ok: false, result: "no URL specified" }
+     if (req.query && req.query.hasOwnProperty('url')) {
+         result = await fetchImage(req.query.url)     }
+
+    let result = await fetch('https://images.unsplash.com/photo-1566275529824-cca6d008f3da?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGhvdG98ZW58MHx8MHx8fDA%3D')
+    console.log('GET: /image')
+    //console.log(result.body)
+    console.log('type: >> ', typeof result.body)
+    console.log('body: >> ', result.body)
+
+    let reader = result.body.getReader()
+    console.log('reader: >> ', reader)
+
+
+})
+*/
+/*
 app.post('/', async (req, res) => {
     console.log(req.query)
     let result = { ok: false, result: "no URL specified" }
@@ -39,7 +77,7 @@ app.post('/', async (req, res) => {
     }
     res.send(result)
 })
-
+*/
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
 })
@@ -58,4 +96,3 @@ async function fetchUrl(url, data = false) {
     console.log(res)
     return res
 }
-
