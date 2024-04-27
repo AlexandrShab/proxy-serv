@@ -47,17 +47,16 @@ app.listen(PORT, () => {
 async function fetchUrl(url, data = false) {
     //url = + '?api_key=e9fda4c1d8b07802b36231a25e0090ef&append_to_response=videos'
     let api_url = 'https://api.themoviedb.org/3/' + url
+    let response
     if (data) {
         console.log('URL >>>'.url)
-        let response = await fetch(api_url, data)
-        let res = await response.json()
-        console.log(res)
-        return res
+        response = await fetch(api_url, data)
     } else {
-        let response = await fetch(api_url)
-        let res = await response.json()
-        console.log(res)
-        return res
+        response = await fetch(api_url)
     }
+    let res = await response.json()
+    console.log(res)
+    return res
+}
 
 }
