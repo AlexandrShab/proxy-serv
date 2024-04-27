@@ -1,5 +1,4 @@
 const express = require('express')
-
 const { pipeline } = require('node:stream/promises')
 
 const PORT = process.env.PORT || 10000
@@ -15,9 +14,11 @@ const app = express()
 app.get('/api', async (req, res) => {
     console.log(req.query)
     let resp = { ok: false, result: "no URL specified" }
+    let api_url = 'https://api.themoviedb.org/3/'
     if (req.query && req.query.hasOwnProperty('url')) {
         try {
-            let result = await fetch(req.query.url, auth)
+            api_url += req.query.url
+            let result = await fetch(api_url, auth)
             resp = await result.json()
         } catch (err) {
             resp = { ok: false, error: err }
