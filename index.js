@@ -54,7 +54,7 @@ async function fetchUrl(url, data = false) {
         console.log(res)
         return res
     } else {
-        let response = await fetch(url)
+        let response = await fetch(api_url)
         let res = await response.json()
         console.log(res)
         return res
