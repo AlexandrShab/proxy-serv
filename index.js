@@ -1,7 +1,7 @@
 const express = require('express')
 //const fetch = require('node-fetch-native')
 const proxy = require('express-http-proxy')
-const { read } = require('fs')
+
 
 const PORT = process.env.PORT || 10000
 
