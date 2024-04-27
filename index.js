@@ -59,4 +59,3 @@ async function fetchUrl(url, data = false) {
     return res
 }
 
-}
