@@ -1,18 +1,20 @@
 const express = require('express')
 const fetch = require('node-fetch-native')
 const proxy = require('express-http-proxy')
-const Stream = require('stream');
+
 const PORT = process.env.PORT || 10000
 
 const app = express()
-
-app.use('/image', proxy('https://image.tmdb.org/t/p/original/', {//eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg'
-    proxyReqPathResolver: function (req) {
-        var parts = req.url.split('/');
-        var fileName = parts.pop();
-        return fileName ? fileName : '';
-    }
-}))
+app.use('/thumb', proxy('https://image.tmdb.org/t/p/original/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg'))
+app.use('/image', proxy('https://image.tmdb.org/t/p/original/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg'))
+/* {//eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg'
+proxyReqPathResolver: function (req) {
+    var parts = req.url.split('/');
+    var fileName = parts.pop();
+    return fileName ? fileName : '';
+}
+}
+*/
 
 //pp.use('/image', proxy('https://images.unsplash.com/photo-1566275529824-cca6d008f3da?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGhvdG98ZW58MHx8MHx8fDA%3D'))
 
