@@ -7,14 +7,20 @@ const app = express()
 
 app.get('/', async (req, res) => {
     console.log(req.query)
-    let result = await fetchUrl(req.query.url)
+    let result = { ok: false, result: "no URL specified" }
+    if (req.query && req.query.hasOwnProperty('url')) {
+        result = await fetchUrl(req.query.url)
+    }
     res.send(result)
 
 })
 
 app.get('/api', async (req, res) => {
     console.log(req.query)
-    let result = await fetchUrl(req.query.url, { method: get, headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOWZkYTRjMWQ4YjA3ODAyYjM2MjMxYTI1ZTAwOTBlZiIsInN1YiI6IjY2MmFhYmJlNTAxY2YyMDExZGIzM2I5MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pHEhpbpJq7-FfLHmR2C1-Y1E_8qn1h2QL2INlmKPnyw' } })
+    let result = { ok: false, result: "no URL specified" }
+    if (req.query && req.query.hasOwnProperty('url')) {
+        result = await fetchUrl(req.query.url, { method: get, headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOWZkYTRjMWQ4YjA3ODAyYjM2MjMxYTI1ZTAwOTBlZiIsInN1YiI6IjY2MmFhYmJlNTAxY2YyMDExZGIzM2I5MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pHEhpbpJq7-FfLHmR2C1-Y1E_8qn1h2QL2INlmKPnyw' } })
+    }
     res.send(result)
 
 })
