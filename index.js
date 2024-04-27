@@ -1,12 +1,15 @@
 const express = require('express')
-const fetch = require('node-fetch-native')
+//const fetch = require('node-fetch-native')
 const proxy = require('express-http-proxy')
+const { read } = require('fs')
 
 const PORT = process.env.PORT || 10000
 
 const app = express()
+
 app.use('/thumb', proxy('https://image.tmdb.org/t/p/original/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg'))
-app.use('/image', proxy('https://image.tmdb.org/t/p/original/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg'))
+app.use('/image', proxy('https://image.tmdb.org/t/p/original/FUnAVgaTs5xZWXcVzPJNxd9qGA.jpg'))
+
 /* {//eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg'
 proxyReqPathResolver: function (req) {
     var parts = req.url.split('/');
@@ -50,11 +53,11 @@ app.get('/api', async (req, res) => {
 
 
 
-
 /*
+
 app.get('/image', async (req, res) => {
-    /* console.log(req.query)
-     let result = { ok: false, result: "no URL specified" }
+     console.log(req.query)
+    let result = { ok: false, result: "no URL specified" }
      if (req.query && req.query.hasOwnProperty('url')) {
          result = await fetchImage(req.query.url)     }
 
@@ -65,11 +68,31 @@ app.get('/image', async (req, res) => {
     console.log('body: >> ', result.body)
 
     let reader = result.body.getReader()
-    console.log('reader: >> ', reader)
+    let full
+    let received = 0;
+    reader.read().then(function processImg({ done, value }) {
+
+        if (done) {
+            console.log('Готово')
+            res.send(Buffer.from(full))
+        }
+
+
+        full += value
+        console.log('Получено: >> ')
+
+        return reader.read().then(processImg);
+
+    })
+
+
+    // result.body.pipeTo(res)
 
 
 })
 */
+
+
 /*
 app.post('/', async (req, res) => {
     console.log(req.query)
