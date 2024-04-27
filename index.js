@@ -34,7 +34,6 @@ app.post('/', async (req, res) => {
     res.send(result)
 })
 
-
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
 })
@@ -42,15 +41,8 @@ app.listen(PORT, () => {
 async function fetchUrl(url, data = false) {
     //url = + '?api_key=e9fda4c1d8b07802b36231a25e0090ef&append_to_response=videos'
     if (data) {
-        const options = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        }
         console.log('URL >>>'.url)
-        let response = await fetch(url, options)
+        let response = await fetch(url, data)
         let res = await response.json()
         console.log(res)
         return res
