@@ -19,7 +19,13 @@ app.get('/api', async (req, res) => {
     console.log(req.query)
     let result = { ok: false, result: "no URL specified" }
     if (req.query && req.query.hasOwnProperty('url')) {
-        result = await fetchUrl(req.query.url, { method: 'get', headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOWZkYTRjMWQ4YjA3ODAyYjM2MjMxYTI1ZTAwOTBlZiIsInN1YiI6IjY2MmFhYmJlNTAxY2YyMDExZGIzM2I5MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pHEhpbpJq7-FfLHmR2C1-Y1E_8qn1h2QL2INlmKPnyw' } })
+        result = await fetchUrl(req.query.url, {
+            method: 'get',
+            headers: {
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOWZkYTRjMWQ4YjA3ODAyYjM2MjMxYTI1ZTAwOTBlZiIsInN1YiI6IjY2MmFhYmJlNTAxY2YyMDExZGIzM2I5MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pHEhpbpJq7-FfLHmR2C1-Y1E_8qn1h2QL2INlmKPnyw',
+                accept: 'application/json',
+            }
+        })
     }
     res.send(result)
 
@@ -40,9 +46,10 @@ app.listen(PORT, () => {
 
 async function fetchUrl(url, data = false) {
     //url = + '?api_key=e9fda4c1d8b07802b36231a25e0090ef&append_to_response=videos'
+    let api_url = 'https://api.themoviedb.org/3/' + url
     if (data) {
         console.log('URL >>>'.url)
-        let response = await fetch(url, data)
+        let response = await fetch(api_url, data)
         let res = await response.json()
         console.log(res)
         return res
