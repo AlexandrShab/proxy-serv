@@ -1,7 +1,7 @@
 const express = require('express')
 const fetch = require('node-fetch-native')
 
-const PORT = process.env.PORT || 7000
+const PORT = process.env.PORT || 10000
 
 const app = express()
 
