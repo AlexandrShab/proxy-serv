@@ -1,17 +1,14 @@
 {
-  "name": "proxy-server",
-  "version": "1.0.0",
-  "description": "Proxy for Projects",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Alexandr Shabanovich",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.19.2",
-    "express-http-proxy": "^2.0.0",
-    "node-fetch-native": "^1.6.4",
-    "stream": "^0.0.2"
-  }
+    "name": "proxy-server",
+    "version": "1.0.0",
+    "description": "Proxy for Projects",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Alexandr Shabanovich",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.19.2"
+    }
 }
