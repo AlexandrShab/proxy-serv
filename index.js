@@ -31,6 +31,7 @@ app.get('/api', async (req, res) => {
         }
         try {
             api_url += paramStr
+            console.log(api_url)
             let result = await fetch(api_url, auth)
             resp = await result.json()
         } catch (err) {
