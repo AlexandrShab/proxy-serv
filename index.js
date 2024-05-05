@@ -12,27 +12,27 @@ const auth = {
 }
 const app = express()
 app.get('/api', async (req, res) => {
-    console.log(req.query)
     let resp = { ok: false, result: "no URL specified" }
     let api_url = 'https://api.themoviedb.org/3/'
     if (req.query && req.query.hasOwnProperty('url')) {
-        console.log(req.query.url)
-        let paramStr = req.query.url + '?'
-        let i = 0
-        for (let key in req.query) {
+        var paramStr = req.query.url + '?'
+        var i = 0
+        for (var key in req.query) {
             if (i == 0) {
+                i++
                 continue
             }
             else if (i == 1) {
-                paramStr += req.query[key] + '=' + key
+                paramStr += key + '=' + req.query[key]
+                i++
             } else {
-                paramStr += '&' + req.query[key] + '=' + key
+                paramStr += '&' + key + '=' + req.query[key]
+                i++
             }
-            i++
         }
         try {
             api_url += paramStr
-            console.log(api_url)
+            console.log('Fetch URL: >>', api_url)
             let result = await fetch(api_url, auth)
             resp = await result.json()
         } catch (err) {
