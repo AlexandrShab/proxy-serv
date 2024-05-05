@@ -17,8 +17,15 @@ app.get('/api', async (req, res) => {
     let api_url = 'https://api.themoviedb.org/3/'
     if (req.query && req.query.hasOwnProperty('url')) {
         console.log(req.query.url)
+        let paramsStr
+        let i = 0
+        for (let key in req.query) {
+            if (i == 0) continue
+            paramStr += '&' + req.query[key] + '=' + key
+            i++
+        }
         try {
-            api_url += req.query.url
+            api_url += paramsStr
             let result = await fetch(api_url, auth)
             resp = await result.json()
         } catch (err) {
