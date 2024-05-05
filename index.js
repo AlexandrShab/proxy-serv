@@ -20,14 +20,15 @@ app.get('/api', async (req, res) => {
         let paramStr = req.query.url + '?'
         let i = 0
         for (let key in req.query) {
-            if (i == 0) continue
+            if (i == 0) {
+                continue
+            }
             else if (i == 1) {
                 paramStr += req.query[key] + '=' + key
-                i++
             } else {
                 paramStr += '&' + req.query[key] + '=' + key
-                i++
             }
+            i++
         }
         try {
             api_url += paramStr
